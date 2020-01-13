@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://kit.fontawesome.com/e42df28727.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" charset="utf-8"></script>
+    <title>Lista di cose da fare</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lista todo</h1>
+        <div class="container2">
+            <div id="create">
+                <input id="new-todo-text" type="text" value="" placeholder="Inserisci il testo">
+                <button id="new-todo">Inserisci</button>
+            </div>
+            <ul id="todo-list">
+            </ul>
+        </div>
+    </div>
+
+    <script id="todo-template" type="text/x-handlebars-template">
+        <li data-todo_id="{{ todo_id }}">
+            <i class="fas fa-trash-alt delete-todo"></i>
+            {{ todo_text }}</li>
+    </script>
+</body>
+
+</html>
