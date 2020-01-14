@@ -21,7 +21,7 @@ button {
     margin-left: 300px;
 }
 
-#todo_list li i {
+#todo-list li i {
     cursor: pointer;
     font-size: 20px;
 }

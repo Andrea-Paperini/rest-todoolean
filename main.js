@@ -2,7 +2,7 @@ $(document).ready(function() {
     var html_template = $("#todo-template").html();
     var template_function = Handlebars.compile(html_template);
     stampa_todos();
-    tasto_invio("#new-todo-text");
+    tasto_invio();
     // Creazione di un nuovo todo (intercetto il click sul button)
     $("#new-todo").click(function() {
         // recupero il testo inserito dall'utente
@@ -32,8 +32,7 @@ $(document).ready(function() {
                         todo_text: testo_todo
                     }
                     var html_todo = template_function(template_data);
-                    $("#todo_list").append(html_todo);
-                    $('#todo-list').append('<li data-todo_id="' + id_todo + '">' + testo_todo + '</li>');
+                    $("#todo-list").append(html_todo);
                 }
             },
             'error': function() {
@@ -42,13 +41,13 @@ $(document).ready(function() {
         });
     }
 
-    function crea_todo() {
+    function crea_todo(parametro1) {
         // faccio una chiamata per salvare il nuovo todo
         $.ajax({
             'url': 'http://157.230.17.132:3016/todos/',
             'method': 'POST',
             'data': {
-                'text': testo_nuovo_todo
+                'text': parametro1
             },
             'success': function(data) {
                 stampa_todos();
@@ -59,7 +58,7 @@ $(document).ready(function() {
         });
     }
     // cancellazione todo (intercetto il click sul cestino)
-    $("#todo_list").on("click", ".delete-todo", function() {
+    $("#todo-list").on("click", ".delete-todo", function() {
         // recupero l'id dell'item da cancellare
         var todo_id = $(this).parent().attr("data-todo_id");
         // chiamata DELETE
@@ -76,11 +75,10 @@ $(document).ready(function() {
     })
     // creo una funzione keypress per avviare la ricerca digitando invio
     function tasto_invio() {
-        $('#new-todo-text').keypress(function() {
-            if (event.which == 13) {
-                stampa_todos();
-
-
+        $('#new-todo-text').keypress(function(event) {
+            // debugger;
+            if (event.which === 13) {
+                $("#new-todo").trigger("click");
             }
         });
     };
